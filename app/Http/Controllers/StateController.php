@@ -7,6 +7,7 @@ use App\Http\Requests\StoreStateRequest;
 use App\Http\Requests\UpdateStateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use App\Http\Resources\StateResource;
 
 class StateController extends Controller
 {
@@ -64,5 +65,15 @@ class StateController extends Controller
     public function destroy(State $state): RedirectResponse
     {
         //
+    }
+
+    public function all_states(){
+        $all_states = State::get();
+        return StateResource::collection($all_states);
+    }
+
+    public function get_state_by_id($state_id){
+        $state = State::find($state_id);
+        return new StateResource($state);
     }
 }

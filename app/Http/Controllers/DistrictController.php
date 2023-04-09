@@ -8,6 +8,7 @@ use App\Http\Requests\StoreDistrictRequest;
 use App\Http\Requests\UpdateDistrictRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use App\Http\Resources\DistrictResource;
 
 class DistrictController extends Controller
 {
@@ -68,8 +69,18 @@ class DistrictController extends Controller
         //
     }
 
+    public function all_districts(){
+        $districts = District::get();
+        return DistrictResource::collection($districts);
+    }
+
+    public function get_district_by_id($district_id){
+        $district = District::find($district_id);
+        return new DistrictResource($district);
+    }
+
     public function get_district_by_state($state_id){
         $districts = State::find($state_id)->districts;
-        return $districts;
+        return DistrictResource::collection($districts);
     }
 }

@@ -21,9 +21,9 @@ class EmployeeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**
